@@ -1,0 +1,18 @@
+$(document).ready(function () {
+    function checkPersian(firstChar) {
+        var HebrewChars = new RegExp("^[\u0590-\u083F]|[\u08A0-\u08FF]|[\uFB1D-\uFDFF]|[\uFE70-\uFEFF]+$");
+        for (var i = 0; i < firstChar.length; i++) {
+            if (HebrewChars.test(firstChar[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function checkInputDirection() {
+        checkPersian($(this).val().substr(0, 1)) ? $(this).addClass("ltr-td") : $(this).removeClass("ltr-td")
+    }
+
+    $('input').keyup(checkInputDirection);
+    $('textarea').keyup(checkInputDirection);
+});
